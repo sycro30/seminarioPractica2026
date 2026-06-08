@@ -84,17 +84,42 @@ public class VentanaReporteAsistenciaCelulas {
     );
 
     TableColumn<ReporteCelula, Number> colVariacion = new TableColumn<>("Variación");
-    colVariacion.setCellValueFactory(d ->
-      new SimpleDoubleProperty(d.getValue().getVariacion())
+    colVariacion.setCellValueFactory(dato ->
+      new SimpleDoubleProperty(dato.getValue().getVariacion())
+    );
+    colVariacion.setCellFactory(col ->
+      new TableCell<>() {        
+        @Override
+        protected void updateItem(Number valor, boolean empty) {
+          super.updateItem(valor, empty);
+          if (empty || valor == null) {
+            setText(null);
+          } else {
+            setText(String.format("%.2f %%", valor.doubleValue()));
+          }
+        }
+      }
     );
 
     TableColumn<ReporteCelula, Number> colParticipacion = new TableColumn<>("Participación %");
-    colParticipacion.setCellValueFactory(d ->
-      new SimpleDoubleProperty(d.getValue().getParticipacion())
+    colParticipacion.setCellValueFactory(dato ->
+      new SimpleDoubleProperty(dato.getValue().getParticipacion())
+    );
+    colParticipacion.setCellFactory(col ->
+      new TableCell<>() {
+        @Override
+        protected void updateItem(Number valor, boolean empty) {
+          super.updateItem(valor, empty);
+          if (empty || valor == null) {
+            setText(null);
+          } else {
+            setText(String.format("%.2f %%", valor.doubleValue()));
+          }
+        }
+      }
     );
 
     tabla.getColumns().addAll(colCelula, colPromedio1, colPromedio2, colVariacion, colParticipacion);
-
     tabla.setPlaceholder(new Label("Seleccione células y genere un reporte"));
   }
 
