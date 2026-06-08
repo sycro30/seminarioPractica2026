@@ -1,0 +1,16 @@
+# Compilados
+*.class
+
+# Maven
+target/
+
+# Gradle
+build/
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+
+# Sistema
+.DS_Store
